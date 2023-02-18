@@ -25,7 +25,7 @@ app.use("/api/v1/category", category);
 
 //schemaless models
 app.get("/", (req, res) => {
-  res.send({ msg: "all good" });
+  res.send({ msg: "Hello All" });
 });
 app.post("/api/v1/save-siteSettings", saveAdminSetings);
 app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
