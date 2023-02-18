@@ -4,15 +4,15 @@ const becrypt = require("bcryptjs");
 
 exports.regesterUser = async (req, res) => {
   try {
-    const { name, email, password, profile, phone, id, role, isPassChanded } =
+    const { name, email, password, profile, phone, id, role, isPassChanded,address } =
       req.body;
-
     if (!id) {
       const newuser = await user.create({
         name,
         email,
         role,
         password,
+        address,
         profile,
         phone,
       });
@@ -30,6 +30,7 @@ exports.regesterUser = async (req, res) => {
           role: role || "user",
           profile: profile || "",
           phone,
+          address,
         },
         {
           new: true,

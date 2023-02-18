@@ -6,7 +6,6 @@ const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     require: true,
-    maxLength: 30,
   },
   email: {
     type: String,
@@ -26,6 +25,7 @@ const UserSchema = new mongoose.Schema({
     default: "user",
   },
   profile: String,
+  address: String,
 
   createdAT: {
     type: Date,
