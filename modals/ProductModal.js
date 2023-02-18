@@ -19,7 +19,13 @@ const productschems = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  images: [],
+
+  images: {
+    type: Array,
+    default: [
+      "https://res.cloudinary.com/derplm8c6/image/upload/v1676731190/pngaaa.com-1887013_jsvtwg.png",
+    ],
+  },
 
   category: String,
   offers: String,
