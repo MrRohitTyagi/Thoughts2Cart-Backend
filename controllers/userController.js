@@ -4,8 +4,17 @@ const becrypt = require("bcryptjs");
 
 exports.regesterUser = async (req, res) => {
   try {
-    const { name, email, password, profile, phone, id, role, isPassChanded,address } =
-      req.body;
+    const {
+      name,
+      email,
+      password,
+      profile,
+      phone,
+      id,
+      role,
+      isPassChanded,
+      address,
+    } = req.body;
     if (!id) {
       const newuser = await user.create({
         name,
@@ -44,13 +53,12 @@ exports.regesterUser = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .send(
+    res.status(500).send({
+      message:
         err.code === 11000
           ? "User already exists !"
-          : "Please enter a valid email !"
-      );
+          : "Please enter a valid email !",
+    });
   }
 };
 
@@ -88,7 +96,7 @@ exports.getUserDetails = async (req, res) => {
       );
     } catch (error) {
       console.log(error);
-      res.status(404).send("something went wrong");
+      res.status(404).send({ message: "something went wrong" });
     }
   } else {
     try {
@@ -107,7 +115,7 @@ exports.getUserDetails = async (req, res) => {
       });
     } catch (error) {
       console.log(error);
-      res.status(404).send("something went wrong");
+      res.status(404).send({ message: "something went wrong" });
     }
   }
 };
@@ -199,6 +207,6 @@ exports.matchPasswords = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
-    res.status(404).send("something went wrong");
+    res.status(404).send({ message: "something went wrong" });
   }
 };

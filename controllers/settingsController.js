@@ -7,7 +7,7 @@ exports.getAllAdminSettings = async (req, res) => {
     console.log(UpdatedSettings);
     res.status(200).json(UpdatedSettings);
   } catch (error) {
-    res.status(500).send("Something went wrong");
+    res.status(500).send({ message: "Something went wrong" });
     console.log(error);
   }
 };
@@ -28,7 +28,7 @@ exports.saveAdminSetings = async (req, res) => {
       console.log("ID NOT FOUND");
     }
   } catch (error) {
-    res.status(500).send("Something went wrong");
+    res.status(500).send({ message: "Something went wrong" });
     console.log(error);
   }
 };
