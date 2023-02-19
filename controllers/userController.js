@@ -63,11 +63,10 @@ exports.regesterUser = async (req, res) => {
 };
 
 exports.getUserDetails = async (req, res) => {
-  const { id, email, password } = req.query;
-  if (email) {
-    console.log(req.query);
-    let isValid = false;
-    try {
+  try {
+    const { id, email, password } = req.query;
+
+    if (email) {
       let UserDetail = await user.find({ email: email });
       console.log(UserDetail);
       if (UserDetail.length === 0) {
@@ -88,35 +87,29 @@ exports.getUserDetails = async (req, res) => {
             });
           } else {
             res.status(400).json({
-              success: true,
-              user: { isValid: false },
+              success: false,
+              message: "User not found ",
             });
           }
         }
       );
-    } catch (error) {
-      console.log(error);
-      res.status(404).send({ message: "something went wrong" });
-    }
-  } else {
-    try {
-      let UserDetail = await user.find({ _id: id });
-
-      if (UserDetail.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: "No user found",
+    } else if (id) {
+      let UserDetail = await user.findById(id);
+      if (UserDetail) {
+        return res.status(200).json({
+          success: true,
+          user: UserDetail,
         });
       }
-
+    } else {
       res.status(200).json({
-        success: true,
-        user: UserDetail[0],
+        success: false,
+        message: "User not found",
       });
-    } catch (error) {
-      console.log(error);
-      res.status(404).send({ message: "something went wrong" });
     }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: "Something went wrong" });
   }
 };
 
