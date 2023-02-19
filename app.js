@@ -16,7 +16,7 @@ const {
   saveAdminSetings,
 } = require("./controllers/settingsController");
 
-app.use("/api/v1", product);
+app.use("/api/v1/products", product);
 
 app.use("/api/v1/user", user);
 

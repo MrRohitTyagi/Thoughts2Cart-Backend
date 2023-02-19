@@ -10,18 +10,18 @@ const {
 } = require("../controllers/productController");
 const router = express.Router();
 
-router.route("/products").get(getAllProducts);
+router.route("/all").get(getAllProducts);
 
-router.route("/products/new").post(createProduct);
+router.route("/new").post(createProduct);
 
-router.route("/products/update/:id").put(updateProduct);
+router.route("/update/:id").put(updateProduct);
 
-router.route("/products/delete/").delete(deleteProduct);
+router.route("/delete/").delete(deleteProduct);
 
-router.route("/products/GetDetails/:id").get(getProductDetails);
+router.route("/GetDetails/:id").get(getProductDetails);
 
-router.route("/products/globalSearch").get(globalSearch);
+router.route("/globalSearch").get(globalSearch);
 
-router.route("/products/FilterData").get(FilterData);
+router.route("/FilterData").get(FilterData);
 
 module.exports = router;
