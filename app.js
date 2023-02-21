@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 const app = express();
 app.use(express.json());
 app.use(cors({ origin: "*", methods: "GET,HEAD,PUT,PATCH,POST,DELETE" }));
@@ -15,6 +17,7 @@ const {
   getAllAdminSettings,
   saveAdminSetings,
 } = require("./controllers/settingsController");
+const { deleteImage } = require("./controllers/imageController");
 
 app.use("/api/v1/products", product);
 
@@ -28,7 +31,11 @@ app.use("/api/v1/category", category);
 app.get("/", (req, res) => {
   res.send({ msg: "Hello All" });
 });
+// admin settings routes
 app.post("/api/v1/save-siteSettings", saveAdminSetings);
 app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
+
+// image CRUD  Routes
+app.delete("/api/v1/delete-image/", deleteImage);
 
 module.exports = app;

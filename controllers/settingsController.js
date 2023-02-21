@@ -4,7 +4,7 @@ exports.getAllAdminSettings = async (req, res) => {
   try {
     const { id, data } = req.params;
     const UpdatedSettings = await siteSettings.findById(id);
-    console.log(UpdatedSettings);
+    // console.log(UpdatedSettings);
     res.status(200).json(UpdatedSettings);
   } catch (error) {
     res.status(500).send({ message: "Something went wrong" });
