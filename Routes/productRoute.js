@@ -7,10 +7,13 @@ const {
   globalSearch,
   deleteProduct,
   getProductDetails,
+  getCategorisedProducts,
 } = require("../controllers/productController");
 const router = express.Router();
 
 router.route("/all").get(getAllProducts);
+
+router.route("/category/:name").get(getCategorisedProducts);
 
 router.route("/new").post(createProduct);
 
