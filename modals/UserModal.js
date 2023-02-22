@@ -31,6 +31,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  wishlist: {
+    type: Array,
+    default: [],
+  },
 });
 
 UserSchema.pre("save", async function (next) {

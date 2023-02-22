@@ -5,6 +5,7 @@ const becrypt = require("bcryptjs");
 exports.regesterUser = async (req, res) => {
   try {
     const {
+      wishlist,
       name,
       email,
       password,
@@ -17,6 +18,7 @@ exports.regesterUser = async (req, res) => {
     } = req.body;
     if (!id) {
       const newuser = await user.create({
+        wishlist,
         name,
         email,
         role,
@@ -33,6 +35,7 @@ exports.regesterUser = async (req, res) => {
       let UserDetail = await user.findByIdAndUpdate(
         id,
         {
+          wishlist,
           password: encryptedPass,
           name,
           email,
@@ -180,10 +183,12 @@ exports.matchPasswords = async (req, res) => {
             {
               password: encryptedPass,
               name: UserDetail[0].name,
+              wishlist: UserDetail[0].wishlist,
               email: UserDetail[0].email,
               role: UserDetail[0].role || "user",
               profile: UserDetail[0].profile || "",
               phone: UserDetail[0].phone,
+              address: UserDetail[0].address,
             },
             {
               new: true,
