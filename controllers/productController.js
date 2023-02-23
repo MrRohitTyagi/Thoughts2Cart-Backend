@@ -253,20 +253,19 @@ exports.getCategorisedProducts = async (req, res, next) => {
   try {
     let { name } = req.params;
     console.log(name);
-    let filtereddata = await product.find();
-    let data = filtereddata.filter(
-      (ele) => ele.category.trim().toLowerCase() === name.trim().toLowerCase()
-    );
+    let filtereddata = await product.find({
+      category: { $in: name.trim().toLowerCase() },
+    });
+
     if (filtereddata.length == 0) {
       return res.status(200).json({
         success: false,
         message: "No  products found ",
       });
     }
-    console.log(data);
     res.send({
       success: true,
-      response: data,
+      response: filtereddata,
     });
   } catch (error) {
     console.log(error);
