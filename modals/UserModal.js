@@ -25,7 +25,10 @@ const UserSchema = new mongoose.Schema({
     default: "user",
   },
   profile: String,
-  address: String,
+  address: {
+    type: Object,
+    default: {},
+  },
 
   createdAT: {
     type: Date,
