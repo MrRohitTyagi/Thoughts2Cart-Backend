@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 console.log(process.env.MONGO_STRING);
-console.log(process.env.CLOUD_NAME);
+
 const connectDatabase = () => {
   mongoose
     .connect(process.env.MONGO_STRING)

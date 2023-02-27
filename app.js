@@ -18,6 +18,7 @@ const {
   saveAdminSetings,
 } = require("./controllers/settingsController");
 const { deleteImage } = require("./controllers/imageController");
+const { paymentProcessor } = require("./controllers/paymentController");
 
 app.use("/api/v1/products", product);
 
@@ -37,5 +38,7 @@ app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
 
 // image CRUD  Routes
 app.delete("/api/v1/delete-image/", deleteImage);
+
+app.post("/api/v1/payment/payment-session/", paymentProcessor);
 
 module.exports = app;
