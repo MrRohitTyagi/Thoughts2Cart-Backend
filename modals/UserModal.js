@@ -38,6 +38,10 @@ const UserSchema = new mongoose.Schema({
     type: Array,
     default: [],
   },
+  orders: {
+    type: Array,
+    default: [],
+  },
 });
 
 UserSchema.pre("save", async function (next) {

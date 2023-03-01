@@ -5,6 +5,7 @@ const becrypt = require("bcryptjs");
 exports.regesterUser = async (req, res) => {
   try {
     const {
+      orders,
       wishlist,
       name,
       email,
@@ -26,6 +27,7 @@ exports.regesterUser = async (req, res) => {
         address,
         profile,
         phone,
+        orders,
       });
 
       res.status(200).json(newuser);
@@ -35,6 +37,7 @@ exports.regesterUser = async (req, res) => {
       let UserDetail = await user.findByIdAndUpdate(
         id,
         {
+          orders,
           wishlist,
           password: encryptedPass,
           name,

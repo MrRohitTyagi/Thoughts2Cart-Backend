@@ -1,14 +1,12 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-console.log(process.env.CLIENT_URL, "jdfhasdhfhasvhjds");
-console.log(process.env.STRIPE_KEY, "jdfhasdhfhasvhjds");
-
 exports.paymentProcessor = async (req, res) => {
+  const { items, paymentgateWayCode } = req.body;
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
-      line_items: req.body.map((item) => {
+      line_items: items.map((item) => {
         console.log(item);
         return {
           price_data: {
@@ -21,8 +19,8 @@ exports.paymentProcessor = async (req, res) => {
           quantity: item.count,
         };
       }),
-      success_url: `${process.env.CLIENT_URL}/viewProfile/1`,
-      cancel_url: `${process.env.CLIENT_URL}/viewProfile/0`,
+      success_url: `${process.env.CLIENT_URL}/viewProfile/1/${paymentgateWayCode}`,
+      cancel_url: `${process.env.CLIENT_URL}/viewProfile/1/${paymentgateWayCode}`,
     });
     res.json({ url: session.url });
   } catch (e) {
