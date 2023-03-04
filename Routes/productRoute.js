@@ -8,6 +8,7 @@ const {
   deleteProduct,
   getProductDetails,
   getCategorisedProducts,
+  getProductsForHomepage
 } = require("../controllers/productController");
 const router = express.Router();
 
@@ -26,5 +27,7 @@ router.route("/GetDetails/:id").get(getProductDetails);
 router.route("/globalSearch").get(globalSearch);
 
 router.route("/FilterData").get(FilterData);
+
+router.route("/home-page-products").get(getProductsForHomepage);
 
 module.exports = router;

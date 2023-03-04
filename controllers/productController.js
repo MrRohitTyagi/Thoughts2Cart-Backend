@@ -252,9 +252,12 @@ exports.FilterData = async (req, res, next) => {
 exports.getCategorisedProducts = async (req, res, next) => {
   try {
     let { name } = req.params;
-    console.log(name);
+    let { page = 1 } = req.query;
+    limit = 20;
+    console.log(page);
+
     let filtereddata = await product.find({
-      category: { $in: name.trim().toLowerCase() },
+      category: { $in: name?.trim()?.toLowerCase() || "" },
     });
 
     if (filtereddata.length == 0) {
@@ -265,7 +268,8 @@ exports.getCategorisedProducts = async (req, res, next) => {
     }
     res.send({
       success: true,
-      response: filtereddata,
+      count: filtereddata.length,
+      response: filtereddata.splice(limit * parseInt(page - 1), limit),
     });
   } catch (error) {
     console.log(error);
@@ -275,3 +279,48 @@ exports.getCategorisedProducts = async (req, res, next) => {
     });
   }
 };
+
+exports.getProductsForHomepage = async (req, res, next) => {
+  try {
+    const { discount } = req.query;
+    console.log(discount);
+
+    let filtereddata = await product.find({
+      discount: { $gt: parseInt(discount) },
+    });
+
+    if (filtereddata.length == 0) {
+      return res.status(200).json({
+        success: false,
+        message: "No  products found ",
+      });
+    }
+    console.log(filtereddata);
+
+    res.send({
+      success: true,
+      count: filtereddata.length,
+      response: groupByCategory(filtereddata),
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
+
+function groupByCategory(arr) {
+  const result = {};
+
+  arr.forEach((item) => {
+    const category = item.category;
+    if (!result[category]) {
+      result[category] = [];
+    }
+    result[category].push(item);
+  });
+
+  return Object.values(result);
+}

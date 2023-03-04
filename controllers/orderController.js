@@ -45,6 +45,7 @@ exports.newOrder = async (req, res) => {
     });
   }
 };
+
 exports.getAllUserorders = async (req, res) => {
   const { data = [] } = req.query;
   console.log(data);
@@ -62,6 +63,22 @@ exports.getAllUserorders = async (req, res) => {
     res.status(200).json({
       success: true,
       response: allOrders,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: true,
+      message: "Something went wrong",
+    });
+  }
+};
+exports.getAllorders = async (req, res) => {
+  try {
+    const orders = await Order.find();
+
+    res.status(200).json({
+      success: true,
+      response: orders,
     });
   } catch (error) {
     console.log(error);
