@@ -14,7 +14,7 @@ exports.paymentProcessor = async (req, res) => {
             product_data: {
               name: item?.description?.slice(0, 15) + "..." || "No name",
             },
-            unit_amount: item.price * 100,
+            unit_amount: Number(item.price) * 100,
           },
           quantity: item.count,
         };
