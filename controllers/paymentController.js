@@ -7,7 +7,6 @@ exports.paymentProcessor = async (req, res) => {
       payment_method_types: ["card"],
       mode: "payment",
       line_items: items.map((item) => {
-        console.log(item);
         return {
           price_data: {
             currency: "inr",

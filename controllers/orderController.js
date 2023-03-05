@@ -22,6 +22,7 @@ exports.newOrder = async (req, res) => {
         };
       }),
       user: userDetails._id,
+      user_email: userDetails.email,
       paymentInfo: {
         id: paymentID,
         status: paymentStatus ? "success" : "Failed",
@@ -32,7 +33,6 @@ exports.newOrder = async (req, res) => {
     //   res.status(200).send("dasdasda");
     //  return;
     const newOrder = await Order.create(obj);
-    console.log(newOrder);
     res.status(200).json({
       success: true,
       response: newOrder,
@@ -48,7 +48,6 @@ exports.newOrder = async (req, res) => {
 
 exports.getAllUserorders = async (req, res) => {
   const { data = [] } = req.query;
-  console.log(data);
   try {
     let alldata = data.map((ele) => {
       return Order.findById(ele);

@@ -21,11 +21,9 @@ exports.saveAdminSetings = async (req, res) => {
         { data },
         { new: true }
       );
-      console.log(UpdatedSettings);
       res.status(200).json(UpdatedSettings);
     } else {
       res.status(400).send("is noot found");
-      console.log("ID NOT FOUND");
     }
   } catch (error) {
     res.status(500).send({ message: "Something went wrong" });

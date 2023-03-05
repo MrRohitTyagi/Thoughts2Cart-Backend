@@ -34,7 +34,6 @@ exports.createProduct = async (req, res) => {
         deliveryTime,
         warranty,
       });
-      console.log(newProduct);
       if (newProduct) {
         res.status(200).json({
           success: true,
@@ -69,7 +68,6 @@ exports.createProduct = async (req, res) => {
           useFindAndModify: false,
         }
       );
-      console.log(upProduct, "fsdfdsfds");
       if (!upProduct) {
         res.status(400).json({
           success: true,
@@ -254,7 +252,6 @@ exports.getCategorisedProducts = async (req, res, next) => {
     let { name } = req.params;
     let { page = 1 } = req.query;
     limit = 20;
-    console.log(page);
 
     let filtereddata = await product.find({
       category: { $in: name?.trim()?.toLowerCase() || "" },
@@ -283,7 +280,6 @@ exports.getCategorisedProducts = async (req, res, next) => {
 exports.getProductsForHomepage = async (req, res, next) => {
   try {
     const { discount } = req.query;
-    console.log(discount);
 
     let filtereddata = await product.find({
       discount: { $gt: parseInt(discount) },
@@ -295,7 +291,6 @@ exports.getProductsForHomepage = async (req, res, next) => {
         message: "No  products found ",
       });
     }
-    console.log(filtereddata);
 
     res.send({
       success: true,

@@ -16,7 +16,6 @@ exports.deleteImage = async (req, res) => {
       return;
     }
     const imageName = splitUrl.at(splitUrl.length - 1).split(".")[0];
-    console.log({ splitUrl, imageName });
 
     let { result } = await cloudinary.uploader.destroy(imageName);
 

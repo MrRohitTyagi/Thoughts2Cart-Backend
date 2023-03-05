@@ -24,7 +24,6 @@ exports.getAllcategory = async (req, res) => {
 exports.createCategory = async (req, res) => {
   try {
     const { name, subCategory, image, id } = req.body;
-    console.log({ name, subCategory, image, id });
     // res.status(500).send("something went wrong");
     // return;
     if (!id) {
@@ -35,7 +34,6 @@ exports.createCategory = async (req, res) => {
       });
 
       res.status(200).json(newcategory);
-      console.log(newcategory);
     } else {
       let categoryDetail = await category.findByIdAndUpdate(
         id,
@@ -50,7 +48,6 @@ exports.createCategory = async (req, res) => {
           useFindAndModify: false,
         }
       );
-      console.log(categoryDetail);
 
       res.status(200).json(categoryDetail);
     }
@@ -62,7 +59,6 @@ exports.createCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
   try {
     const { id } = req.body;
-    console.log(id);
     let deletecategory = await category.findById(id);
     if (!deletecategory) {
       return res.status(400).json({

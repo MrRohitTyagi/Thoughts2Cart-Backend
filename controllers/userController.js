@@ -53,7 +53,6 @@ exports.regesterUser = async (req, res) => {
           useFindAndModify: false,
         }
       );
-      console.log(UserDetail);
 
       res.status(200).json(UserDetail);
     }
@@ -74,14 +73,12 @@ exports.getUserDetails = async (req, res) => {
 
     if (email) {
       let UserDetail = await user.find({ email: email });
-      console.log(UserDetail);
       if (UserDetail.length === 0) {
         return res.status(404).json({
           success: false,
           message: "No user found",
         });
       }
-      console.log(password, "testbjkdfbsdfbasbdjfas");
       await becrypt.compare(
         password,
         UserDetail[0].password,

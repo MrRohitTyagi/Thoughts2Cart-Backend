@@ -19,6 +19,7 @@ const {
 } = require("./controllers/settingsController");
 const { deleteImage } = require("./controllers/imageController");
 const { paymentProcessor } = require("./controllers/paymentController");
+const { sendMail } = require("./controllers/emailcontroller");
 
 app.use("/api/v1/products", product);
 
@@ -32,6 +33,7 @@ app.use("/api/v1/category", category);
 app.get("/", (req, res) => {
   res.send({ msg: "Hello All" });
 });
+
 // admin settings routes
 app.post("/api/v1/save-siteSettings", saveAdminSetings);
 app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
@@ -40,5 +42,8 @@ app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
 app.delete("/api/v1/delete-image/", deleteImage);
 
 app.post("/api/v1/payment/payment-session/", paymentProcessor);
+
+// email route
+app.post("/api/v1/sendemail", sendMail);
 
 module.exports = app;
