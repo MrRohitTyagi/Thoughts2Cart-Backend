@@ -87,3 +87,44 @@ exports.getAllorders = async (req, res) => {
     });
   }
 };
+exports.updateOrder = async (req, res) => {
+  try {
+    const { order } = req.body;
+    const updatedOrder = await Order.findByIdAndUpdate(order._id, order);
+
+    res.status(200).json({
+      success: true,
+      response: updatedOrder,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: true,
+      message: "Something went wrong",
+    });
+  }
+};
+exports.deleteOrder = async (req, res) => {
+  try {
+    const { id } = req.body;
+    console.log(id);
+    let deleteOrder = await Order.findById(id);
+    if (!deleteOrder) {
+      return res.status(400).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+    await deleteOrder.remove();
+    res.status(200).json({
+      success: true,
+      message: "Order deleted successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
