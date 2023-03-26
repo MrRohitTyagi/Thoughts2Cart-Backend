@@ -41,6 +41,7 @@ app.get("/api/v1/get-siteSettings/:id", getAllAdminSettings);
 // image CRUD  Routes
 app.delete("/api/v1/delete-image/", deleteImage);
 
+//payment Controller
 app.post("/api/v1/payment/payment-session/", paymentProcessor);
 
 // email route
